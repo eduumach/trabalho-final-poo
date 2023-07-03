@@ -1,6 +1,7 @@
 package entidades;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
@@ -16,8 +17,8 @@ public class Graos extends Produto{
 
     }
 
-    public Graos(Integer id, String nome, Double sacas, Date dataColheita, Date plantio) {
-        super(id, nome);
+    public Graos(Integer id, String nome, Double preco, String usuario, Double sacas, Date dataColheita, Date plantio) {
+        super(id, nome, preco, usuario);
         this.sacas = sacas;
         this.dataColheita = dataColheita;
         this.plantio = plantio;

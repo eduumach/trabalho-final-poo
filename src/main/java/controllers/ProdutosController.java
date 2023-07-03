@@ -1,26 +1,35 @@
 package controllers;
 
-import entidades.Carnes;
-import entidades.Graos;
-import entidades.Hortalicas;
-import entidades.Usuario;
+import application.Main;
+import dao.CarnesDAO;
+import dao.GraosDAO;
+import dao.HortalicasDAO;
+import dao.UsuarioDAO;
+import entidades.*;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import utils.Alerts;
 
-public class ProdutosController {
+import java.awt.event.PaintEvent;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Date;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public abstract class ProdutosController implements Initializable {
+
+    @FXML
+    private TableView<?> TabelaProdutos;
 
     @FXML
     private Button adicionar;
-
-    @FXML
-    private HBox adicionarProduto;
-
-    @FXML
-    private HBox boxLists;
 
     @FXML
     private Button cancelar;
@@ -29,20 +38,117 @@ public class ProdutosController {
     private Button carnes;
 
     @FXML
+    private TableColumn<?, String> colunaDataFinal;
+
+    @FXML
+    private TableColumn<?, String> colunaDataIncial;
+
+    @FXML
+    private TableColumn<?, ?> colunaEditar;
+
+    @FXML
+    private TableColumn<?, String> colunaNome;
+
+    @FXML
+    private TableColumn<?, String> colunaPreco;
+
+    @FXML
+    private TableColumn<?, ?> colunaRemover;
+
+    @FXML
+    private TableColumn<?, String> colunaUnidade;
+
+    @FXML
+    protected DatePicker dataFinalInput;
+
+    @FXML
+    protected Label dataFinalTextLabel;
+
+    @FXML
+    protected DatePicker dataIncialInput;
+
+    @FXML
+    private Label dataIncialTextLabel;
+
+    @FXML
     private Button graos;
 
     @FXML
     private Button hortalicas;
 
     @FXML
-    private TextField saldo;
+    protected TextField nomeInput;
 
     @FXML
-    private Label lblUsuario;
+    protected TextField precoInput;
 
-    private ObservableList<Carnes> carnesList;
-    private ObservableList<Graos> graosList;
-    private ObservableList<Hortalicas> hortalicasList;
+    @FXML
+    protected Label saldoTextLabel;
+
+    @FXML
+    protected TextField unidadeInput;
+
+    @FXML
+    private Label unidadeTextLabel;
+
+    private ObservableList<?> obsLista;
+
+    protected Usuario usuario;
+
+    protected UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+
+
+
+    @FXML
+    void adicionarClick(ActionEvent event) {
+    }
+
+    @FXML
+    void cancelarClick(ActionEvent event) {
+        limparCampos();
+    }
+
+    @FXML
+    void carnesClick(ActionEvent event) {
+        setJanela("/janelas/ProdutoCarne.fxml");
+    }
+
+    @FXML
+    void graosClick(ActionEvent event) {
+        setJanela("/janelas/ProdutoGraos.fxml");
+    }
+
+    @FXML
+    void hortalicasClick(ActionEvent event) {
+        setJanela("/janelas/ProdutoHortalica.fxml");
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        atulizaTabela();
+    }
+
+    private void limparCampos() {
+        nomeInput.setText("");
+        precoInput.setText("");
+        unidadeInput.setText("");
+    }
+
+    void atulizaTabela() {
+        
+    }
+
+    protected synchronized void setJanela(String nomeJanela) {
+
+        try {
+            Main.alteraScena(nomeJanela,  653, 768);
+
+        } catch (IOException e) {
+            Alerts.mostrarNotificacao(e.getMessage(), Alert.AlertType.ERROR);
+            e.printStackTrace();
+        }
+    }
 
 
 }

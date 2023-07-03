@@ -17,15 +17,6 @@ public class Usuario  implements Serializable{
 
 	private Double saldo;
 
-//	@OneToMany(mappedBy = "graos")
-//	private List<Graos> graos;
-//
-//	@OneToMany(mappedBy = "carnes")
-//	private List<Carnes> carnes;
-//
-//	@OneToMany(mappedBy = "hotalicas")
-//	private List<Hortalicas> hotalicas;
-//
 	public Usuario() {}
 
 	public Usuario(Integer id, String usuario, String senha, Double saldo) {
@@ -38,30 +29,6 @@ public class Usuario  implements Serializable{
 	public Integer getId() {
 		return id;
 	}
-
-//	public List<Graos> getGraos() {
-//		return graos;
-//	}
-//
-//	public void setGraos(List<Graos> graos) {
-//		this.graos = graos;
-//	}
-//
-//	public List<Carnes> getCarnes() {
-//		return carnes;
-//	}
-//
-//	public void setCarnes(List<Carnes> carnes) {
-//		this.carnes = carnes;
-//	}
-
-//	public List<Hortalicas> getHotalicas() {
-//		return hotalicas;
-//	}
-
-//	public void setHotalicas(List<Hortalicas> hotalicas) {
-//		this.hotalicas = hotalicas;
-//	}
 
 	public void setId(Integer id) {
 		this.id = id;

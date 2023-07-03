@@ -38,7 +38,7 @@ public class LoginController {
             String senhaLogin = senha.getText();
             if (usuarioDAO.validaUser(usuarioLogin, senhaLogin)) {
                 Main.getInstance().setUsuarioLogado(usuarioLogin);
-                setJanela("/janelas/Produtos.fxml");
+                setJanela("/janelas/ProdutoHortalica.fxml");
             } else {
                 throw new LoginErroException();
             }
@@ -58,7 +58,7 @@ public class LoginController {
             } else {
                 usuarioDAO.createNewUser(usuarioLogin, senhaLogin);
                 Main.getInstance().setUsuarioLogado(usuarioLogin);
-                setJanela("/janelas/Produtos.fxml");
+                setJanela("/janelas/ProdutoHortalica.fxml");
             }
         } catch (CadastroErroException e) {
             Alerts.mostrarNotificacao(e.getMessage(), Alert.AlertType.ERROR);
@@ -68,7 +68,7 @@ public class LoginController {
     private synchronized void setJanela(String nomeJanela) {
 
         try {
-            Main.alteraScena(nomeJanela,  578, 768);
+            Main.alteraScena(nomeJanela,  653, 768);
 
         } catch (IOException e) {
             Alerts.mostrarNotificacao(e.getMessage(), Alert.AlertType.ERROR);

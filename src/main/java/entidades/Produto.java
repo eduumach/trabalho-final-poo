@@ -1,11 +1,8 @@
 package entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity
+@MappedSuperclass
 public class Produto {
 
     @Id
@@ -14,10 +11,16 @@ public class Produto {
 
     private String nome;
 
+    private Double preco;
 
-    public Produto(Integer id, String nome) {
+    private String usuario;
+
+
+    public Produto(Integer id, String nome, Double preco, String usuario) {
         this.id = id;
         this.nome = nome;
+        this.preco = preco;
+        this.usuario = usuario;
     }
 
     public Produto() {
@@ -38,5 +41,21 @@ public class Produto {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 }
