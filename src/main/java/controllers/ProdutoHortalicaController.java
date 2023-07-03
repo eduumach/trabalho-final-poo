@@ -1,9 +1,10 @@
 package controllers;
 
-
 import application.Main;
 import dao.HortalicasDAO;
+import dao.UsuarioDAO;
 import entidades.Hortalicas;
+import entidades.Usuario;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,13 +14,13 @@ import javafx.scene.control.*;
 
 import java.util.Date;
 
-public class ProdutoHoralicaController extends ProdutosController{
+public class ProdutoHortalicaController extends ProdutosController {
 
     @FXML
-    private TableColumn<Hortalicas, DatePicker> colunaDataFinal;
+    private TableColumn<Hortalicas, String> colunaDataFinal;
 
     @FXML
-    private TableColumn<Hortalicas, DatePicker> colunaDataIncial;
+    private TableColumn<Hortalicas, String> colunaDataInicial;
 
     @FXML
     private TableColumn<Hortalicas, Hortalicas> colunaEditar;
@@ -37,7 +38,7 @@ public class ProdutoHoralicaController extends ProdutosController{
     private TableColumn<Hortalicas, String> colunaUnidade;
 
     @FXML
-    private TableView<Hortalicas> TabelaProdutos;
+    private TableView<Hortalicas> tabelaProdutos;
 
     private HortalicasDAO hortalicasDAO = new HortalicasDAO();
     private ObservableList<Hortalicas> obsLista;
@@ -50,40 +51,40 @@ public class ProdutoHoralicaController extends ProdutosController{
         Date dataInicial = Date.from(dataIncialInput.getValue().atStartOfDay().toInstant(java.time.ZoneOffset.UTC));
         Date dataFinal = Date.from(dataFinalInput.getValue().atStartOfDay().toInstant(java.time.ZoneOffset.UTC));
         String usuario = Main.getInstance().getUsuarioLogado();
+        
         hortalicasDAO.createNewHortalica(nome, preco, unidade, dataInicial, dataFinal, usuario);
-        atulizaTabela();
+        atualizaTabela();
     }
 
-    @Override
-    void atulizaTabela() {
+
+    void atualizaTabela() {
         obsLista = FXCollections.observableList(hortalicasDAO.getAllHortalicas(Main.getInstance().getUsuarioLogado()));
-        TabelaProdutos.setItems(obsLista);
+        tabelaProdutos.setItems(obsLista);
         inicializaBotaoVender();
         inicializaBotaoDeletar();
-        usuario = usuarioDAO.getUsuario(Main.getInstance().getUsuarioLogado());
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        Usuario usuario = usuarioDAO.getUsuario(Main.getInstance().getUsuarioLogado());
         saldoTextLabel.setText("R$ " + usuario.getSaldo().toString());
     }
 
     private void inicializaBotaoVender() {
         colunaEditar.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 
-        colunaEditar.setCellFactory(param -> new TableCell<Hortalicas, Hortalicas>(){
+        colunaEditar.setCellFactory(param -> new TableCell<Hortalicas, Hortalicas>() {
             private final Button button = new Button("Vender");
 
             @Override
             protected void updateItem(Hortalicas hortalica, boolean empty) {
                 super.updateItem(hortalica, empty);
-                if(hortalica == null) {
+                if (hortalica == null) {
                     setGraphic(null);
                     return;
                 }
                 setGraphic(button);
-                button.setOnAction(
-                        event -> {
-                            hortalicasDAO.remover(hortalica);
-                            atulizaTabela();
-                        }
-                );
+                button.setOnAction(event -> {
+                    hortalicasDAO.remover(hortalica);
+                    atualizaTabela();
+                });
             }
         });
     }
@@ -91,26 +92,22 @@ public class ProdutoHoralicaController extends ProdutosController{
     private void inicializaBotaoDeletar() {
         colunaRemover.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 
-        colunaRemover.setCellFactory(param -> new TableCell<Hortalicas, Hortalicas>(){
+        colunaRemover.setCellFactory(param -> new TableCell<Hortalicas, Hortalicas>() {
             private final Button button = new Button("Deletar");
 
             @Override
             protected void updateItem(Hortalicas hortalica, boolean empty) {
                 super.updateItem(hortalica, empty);
-                if(hortalica == null) {
+                if (hortalica == null) {
                     setGraphic(null);
                     return;
                 }
                 setGraphic(button);
-                button.setOnAction(
-                        event -> {
-                            hortalicasDAO.remover(hortalica);
-                            atulizaTabela();
-                        }
-                );
+                button.setOnAction(event -> {
+                    hortalicasDAO.remover(hortalica);
+                    atualizaTabela();
+                });
             }
         });
     }
-
-
 }
