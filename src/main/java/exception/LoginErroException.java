@@ -6,9 +6,5 @@ public class LoginErroException extends Exception{
 	public LoginErroException() {
 		super("Login invalido: usuario ou senha incorreto!");
 	}
-	
-	
-
-	
-
 }
+
