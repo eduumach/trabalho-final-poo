@@ -1,32 +1,23 @@
 package controllers;
 
 import application.Main;
-import dao.CarnesDAO;
-import dao.GraosDAO;
-import dao.HortalicasDAO;
 import dao.UsuarioDAO;
 import entidades.*;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
 import utils.Alerts;
 
-import java.awt.event.PaintEvent;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public abstract class ProdutosController implements Initializable {
 
     @FXML
-    private TableView<?> TabelaProdutos;
+    private TableView<?> tabelaProdutos;
 
     @FXML
     private Button adicionar;
@@ -126,16 +117,18 @@ public abstract class ProdutosController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        atulizaTabela();
+        atualizaTabela();
     }
 
     private void limparCampos() {
         nomeInput.setText("");
         precoInput.setText("");
         unidadeInput.setText("");
+        dataIncialInput.setValue(null);
+        dataFinalInput.setValue(null);
     }
 
-    void atulizaTabela() {
+    void atualizaTabela() {
         
     }
 

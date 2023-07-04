@@ -29,7 +29,7 @@
       </Button>
       <Button fx:id="adicionar" layoutX="512.0" layoutY="555.0" mnemonicParsing="false" onAction="#adicionarClick" prefHeight="28.0" prefWidth="89.0" style="-fx-background-color: transparent; -fx-background-radius: 50; -fx-border-color: #4bb255; -fx-border-width: 2; -fx-border-radius: 50;" text="Adicionar" textFill="#2a5127" />
       <Button fx:id="cancelar" layoutX="623.0" layoutY="555.0" mnemonicParsing="false" onAction="#cancelarClick" prefHeight="28.0" prefWidth="89.0" style="-fx-background-color: transparent; -fx-background-radius: 50; -fx-border-color: #4bb255; -fx-border-width: 2; -fx-border-radius: 50;" text="Cancelar" textFill="#2a5127" />
-      <TableView fx:id="TabelaProdutos" layoutX="62.0" layoutY="260.0" prefHeight="138.0" prefWidth="650.0">
+      <TableView fx:id="tabelaProdutos" layoutX="62.0" layoutY="260.0" prefHeight="138.0" prefWidth="650.0">
          <columns>
             <TableColumn fx:id="colunaNome" prefWidth="107.0" text="Nome" />
             <TableColumn fx:id="colunaPreco" prefWidth="102.0" text="Preço" />

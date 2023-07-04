@@ -1,11 +1,12 @@
 package entidades;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Hortalicas extends Produto{
+public class Hortalicas extends Produto implements Serializable{
+    private static final long serialVersionUID = 1L;
 
     private Date dataColheita;
     private Date plantio;

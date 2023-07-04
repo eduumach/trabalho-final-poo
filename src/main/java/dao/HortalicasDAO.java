@@ -31,11 +31,8 @@ public class HortalicasDAO {
     }
 
     public List<Hortalicas> getAllHortalicas(String usuario) {
-        TypedQuery<Hortalicas> query = entityManager.createQuery("SELECT h FROM Hortalicas h WHERE h.usuario = :usuario", Hortalicas.class)
-                .setParameter("usuario", usuario);
-        List<Hortalicas> hortalicas = query.getResultList();
-        System.out.println(hortalicas);
-        return hortalicas;
+        return entityManager.createQuery("SELECT h FROM Hortalicas h WHERE h.usuario = :usuario", Hortalicas.class)
+                .setParameter("usuario", usuario).getResultList();
     }
 
 
