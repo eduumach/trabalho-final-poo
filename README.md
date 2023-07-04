@@ -6,7 +6,7 @@ Se vira mane
 
 ## Rodando o docker
 ```bash
-docker compose u
+docker compose up
 ```
 
 ## Rodando o projeto com manvem
