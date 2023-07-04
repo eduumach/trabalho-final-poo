@@ -32,22 +32,22 @@
       <TableView fx:id="tabelaProdutos" layoutX="62.0" layoutY="260.0" prefHeight="138.0" prefWidth="650.0">
          <columns>
             <TableColumn fx:id="colunaNome" prefWidth="107.0" text="Nome" />
-            <TableColumn fx:id="colunaPreco" prefWidth="102.0" text="Preço" />
-            <TableColumn fx:id="colunaDataIncial" prefWidth="117.0" text="DataInicial" />
-            <TableColumn fx:id="colunaDataFinal" prefWidth="113.0" text="DataFinal" />
-            <TableColumn fx:id="colunaUnidade" prefWidth="103.0" text="Unidade" />
+            <TableColumn fx:id="colunaPreco" prefWidth="102.0" text="Preço R$" />
+            <TableColumn fx:id="colunaDataIncial" prefWidth="117.0" text="Data de Plantio" />
+            <TableColumn fx:id="colunaDataFinal" prefWidth="113.0" text="Data de Colheita" />
+            <TableColumn fx:id="colunaUnidade" prefWidth="103.0" text="Sacas" />
             <TableColumn fx:id="colunaEditar" prefWidth="52.0" />
             <TableColumn fx:id="colunaRemover" prefWidth="54.0" />
          </columns>
       </TableView>
       <TextField fx:id="nomeInput" layoutX="73.0" layoutY="467.0" prefHeight="38.0" prefWidth="195.0" promptText="Nome:" style="-fx-background-color: transparent; -fx-border-color: #4DB259; -fx-border-width: 0px 0px 2px 0px;" />
       <TextField fx:id="precoInput" layoutX="287.0" layoutY="467.0" prefHeight="38.0" prefWidth="195.0" promptText="Preço:" style="-fx-background-color: transparent; -fx-border-color: #4DB259; -fx-border-width: 0px 0px 2px 0px;" />
-      <TextField fx:id="unidadeInput" layoutX="287.0" layoutY="550.0" prefHeight="38.0" prefWidth="195.0" promptText="Unidade:" style="-fx-background-color: transparent; -fx-border-color: #4DB259; -fx-border-width: 0px 0px 2px 0px;" />
+      <TextField fx:id="unidadeInput" layoutX="287.0" layoutY="550.0" prefHeight="38.0" prefWidth="195.0" promptText="Sacas" style="-fx-background-color: transparent; -fx-border-color: #4DB259; -fx-border-width: 0px 0px 2px 0px;" />
       <Label layoutX="146.0" layoutY="451.0" text="Nome" />
-      <Label layoutX="356.0" layoutY="451.0" text="Preço" />
-      <Label fx:id="dataIncialTextLabel" layoutX="566.0" layoutY="451.0" text="DataInicial" />
-      <Label fx:id="dataFinalTextLabel" layoutX="134.0" layoutY="534.0" text="DataFinal" />
-      <Label fx:id="unidadeTextLabel" layoutX="349.0" layoutY="534.0" text="Unidade" />
+      <Label layoutX="352.0" layoutY="451.0" text="Preço R$" />
+      <Label fx:id="dataIncialTextLabel" layoutX="551.0" layoutY="451.0" text="Data de Plantio" />
+      <Label fx:id="dataFinalTextLabel" layoutX="110.0" layoutY="534.0" text="Data de Colheita" />
+      <Label fx:id="unidadeTextLabel" layoutX="361.0" layoutY="534.0" text="Sacas" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="220.0" text="Saldo:" textAlignment="CENTER">
          <font>
             <Font size="14.0" />
@@ -59,5 +59,6 @@
       </Label>
       <DatePicker fx:id="dataFinalInput" layoutX="73.0" layoutY="560.0" prefHeight="28.0" prefWidth="195.0" />
       <DatePicker fx:id="dataIncialInput" layoutX="504.0" layoutY="477.0" prefHeight="28.0" prefWidth="195.0" />
+      <Button fx:id="sair" layoutX="6.0" layoutY="11.0" mnemonicParsing="false" onAction="#sairClick" prefHeight="28.0" prefWidth="89.0" style="-fx-background-color: transparent; -fx-background-radius: 50; -fx-border-color: #ffffff; -fx-border-width: 2; -fx-border-radius: 50;" text="Sair" textFill="#ffffff" />
    </children>
 </Pane>

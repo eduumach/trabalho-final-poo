@@ -11,11 +11,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import utils.Alerts;
 
 import java.net.URL;
 import java.sql.Timestamp;
@@ -23,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ProdutoGraosController extends ProdutosController{
+public class ProdutoGraosController extends ProdutosController {
 
     @FXML
     private TableColumn<Graos, Timestamp> colunaDataFinal;
@@ -64,13 +62,17 @@ public class ProdutoGraosController extends ProdutosController{
 
     @Override
     void adicionarClick(ActionEvent event) {
-        String nome = nomeInput.getText();
-        Double preco = Double.parseDouble(precoInput.getText());
-        Double unidade = Double.parseDouble(unidadeInput.getText());
-        Date dataInicial = Date.from(dataIncialInput.getValue().atStartOfDay().toInstant(java.time.ZoneOffset.UTC));
-        Date dataFinal = Date.from(dataFinalInput.getValue().atStartOfDay().toInstant(java.time.ZoneOffset.UTC));
-        String usuario = Main.getInstance().getUsuarioLogado();
-        graosDAO.createNewGrao(nome, preco, unidade, dataInicial, dataFinal, usuario);
+        try {
+            String nome = nomeInput.getText();
+            Double preco = Double.parseDouble(precoInput.getText());
+            Double unidade = Double.parseDouble(unidadeInput.getText());
+            Date dataInicial = Date.from(dataIncialInput.getValue().atStartOfDay().toInstant(java.time.ZoneOffset.UTC));
+            Date dataFinal = Date.from(dataFinalInput.getValue().atStartOfDay().toInstant(java.time.ZoneOffset.UTC));
+            String usuario = Main.getInstance().getUsuarioLogado();
+            graosDAO.createNewGrao(nome, preco, unidade, dataInicial, dataFinal, usuario);
+        } catch (Exception e) {
+            Alerts.mostrarNotificacao("Erro ao adicionar produto, verifique os campos", Alert.AlertType.WARNING);
+        }
         atualizaTabela();
     }
 
@@ -89,13 +91,13 @@ public class ProdutoGraosController extends ProdutosController{
     private void inicializaBotaoVender() {
         colunaEditar.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 
-        colunaEditar.setCellFactory(param -> new TableCell<Graos, Graos>(){
+        colunaEditar.setCellFactory(param -> new TableCell<Graos, Graos>() {
             private final Button button = new Button("Vender");
 
             @Override
             protected void updateItem(Graos graos, boolean empty) {
                 super.updateItem(graos, empty);
-                if(graos == null) {
+                if (graos == null) {
                     setGraphic(null);
                     return;
                 }
@@ -113,13 +115,13 @@ public class ProdutoGraosController extends ProdutosController{
     private void inicializaBotaoDeletar() {
         colunaRemover.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 
-        colunaRemover.setCellFactory(param -> new TableCell<Graos, Graos>(){
+        colunaRemover.setCellFactory(param -> new TableCell<Graos, Graos>() {
             private final Button button = new Button("Deletar");
 
             @Override
             protected void updateItem(Graos graos, boolean empty) {
                 super.updateItem(graos, empty);
-                if(graos == null) {
+                if (graos == null) {
                     setGraphic(null);
                     return;
                 }

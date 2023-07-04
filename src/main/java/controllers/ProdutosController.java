@@ -82,14 +82,14 @@ public abstract class ProdutosController implements Initializable {
     @FXML
     private Label unidadeTextLabel;
 
+    @FXML
+    private Button sair;
+
     private ObservableList<?> obsLista;
 
     protected Usuario usuario;
 
     protected UsuarioDAO usuarioDAO = new UsuarioDAO();
-
-
-
 
     @FXML
     void adicionarClick(ActionEvent event) {
@@ -115,6 +115,11 @@ public abstract class ProdutosController implements Initializable {
         setJanela("/janelas/ProdutoHortalica.fxml");
     }
 
+    @FXML
+    void sairClick(ActionEvent event) {
+        setJanelaLogin("/janelas/Login.fxml");
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         atualizaTabela();
@@ -129,13 +134,24 @@ public abstract class ProdutosController implements Initializable {
     }
 
     void atualizaTabela() {
-        
+
+    }
+
+    protected synchronized void setJanelaLogin(String nomeJanela) {
+
+        try {
+            Main.alteraScena(nomeJanela, 356, 235);
+
+        } catch (IOException e) {
+            Alerts.mostrarNotificacao(e.getMessage(), Alert.AlertType.ERROR);
+            e.printStackTrace();
+        }
     }
 
     protected synchronized void setJanela(String nomeJanela) {
 
         try {
-            Main.alteraScena(nomeJanela,  653, 768);
+            Main.alteraScena(nomeJanela, 653, 768);
 
         } catch (IOException e) {
             Alerts.mostrarNotificacao(e.getMessage(), Alert.AlertType.ERROR);

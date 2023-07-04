@@ -4,7 +4,6 @@ package controllers;
 import application.Main;
 import dao.HortalicasDAO;
 import dao.UsuarioDAO;
-import entidades.Contato;
 import entidades.Hortalicas;
 import entidades.Usuario;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -14,6 +13,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
+import utils.Alerts;
+import utils.RestricoesTela;
 
 import java.net.URL;
 import java.sql.Timestamp;
@@ -57,18 +58,27 @@ public class ProdutoHortalicaController extends ProdutosController {
         colunaUnidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
         colunaDataFinal.setCellValueFactory(new PropertyValueFactory<>("dataColheita"));
         colunaDataIncial.setCellValueFactory(new PropertyValueFactory<>("plantio"));
+
+        RestricoesTela.setTextFieldDouble(precoInput);
+        RestricoesTela.setTextFieldDouble(unidadeInput);
         atualizaTabela();
     }
 
     @Override
     void adicionarClick(ActionEvent event) {
-        String nome = nomeInput.getText();
-        Double preco = Double.parseDouble(precoInput.getText());
-        Double unidade = Double.parseDouble(unidadeInput.getText());
-        Date dataInicial = Date.from(dataIncialInput.getValue().atStartOfDay().toInstant(java.time.ZoneOffset.UTC));
-        Date dataFinal = Date.from(dataFinalInput.getValue().atStartOfDay().toInstant(java.time.ZoneOffset.UTC));
-        String usuario = Main.getInstance().getUsuarioLogado();
-        hortalicasDAO.createNewHortalica(nome, preco, unidade, dataInicial, dataFinal, usuario);
+        try {
+            String nome = nomeInput.getText();
+            Double preco = Double.parseDouble(precoInput.getText());
+            Double unidade = Double.parseDouble(unidadeInput.getText());
+            Date dataInicial = Date.from(dataIncialInput.getValue().atStartOfDay().toInstant(java.time.ZoneOffset.UTC));
+            Date dataFinal = Date.from(dataFinalInput.getValue().atStartOfDay().toInstant(java.time.ZoneOffset.UTC));
+            String usuario = Main.getInstance().getUsuarioLogado();
+            hortalicasDAO.createNewHortalica(nome, preco, unidade, dataInicial, dataFinal, usuario);
+        } catch (Exception e) {
+            Alerts.mostrarNotificacao("Erro ao adicionar produto, verifique os campos", Alert.AlertType.WARNING);
+        }
+
+
         atualizaTabela();
     }
 
