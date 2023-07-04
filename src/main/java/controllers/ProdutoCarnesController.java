@@ -36,7 +36,7 @@ public class ProdutoCarnesController extends ProdutosController {
     private TableColumn<Carnes, String> colunaNome;
 
     @FXML
-    private TableColumn<Carnes, Double> colunaPreco;
+    private TableColumn<Carnes, String> colunaPreco;
 
     @FXML
     private TableColumn<Carnes, Carnes> colunaRemover;
@@ -54,6 +54,19 @@ public class ProdutoCarnesController extends ProdutosController {
     public void initialize(URL location, ResourceBundle resources) {
         colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         colunaPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
+//        colunaPreco.setCellFactory(preco -> { return new TableCell<Carnes, Double>(){
+//            @Override
+//            protected void updateItem(Double item, boolean vazio) {
+//                super.updateItem(item, vazio);
+//
+//                if(vazio) {
+//                    setText(null);
+//                }else {
+//                    setText("R$ " + item);
+//                }
+//            }
+//        };
+//        });
         colunaUnidade.setCellValueFactory(new PropertyValueFactory<>("kilos"));
         colunaDataFinal.setCellValueFactory(new PropertyValueFactory<>("dataAbate"));
         colunaDataIncial.setCellValueFactory(new PropertyValueFactory<>("compraNascimento"));

@@ -12,6 +12,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import utils.Alerts;
 
 public class LoginController {
@@ -34,26 +36,44 @@ public class LoginController {
     @FXML
     void fazerLogin(ActionEvent event) {
         try {
-            String usuarioLogin = usuario.getText();
-            String senhaLogin = senha.getText();
-            if (usuarioDAO.validaUser(usuarioLogin, senhaLogin)) {
-                Main.getInstance().setUsuarioLogado(usuarioLogin);
-                setJanela("/janelas/ProdutoHortalica.fxml");
-            } else {
-                throw new LoginErroException();
-            }
+            validaLogin();
         } catch (LoginErroException e) {
             Alerts.mostrarNotificacao(e.getMessage(), Alert.AlertType.ERROR);
             e.printStackTrace();
         }
     }
 
+    void validaLogin() throws LoginErroException {
+
+        String usuarioLogin = usuario.getText();
+        String senhaLogin = senha.getText();
+        if (usuarioDAO.validaUser(usuarioLogin, senhaLogin)) {
+            Main.getInstance().setUsuarioLogado(usuarioLogin);
+            setJanela("/janelas/ProdutoHortalica.fxml");
+        } else {
+            throw new LoginErroException();
+        }
+    }
+
     @FXML
-    void fazerCadastro(){
+    void verificaEnter(KeyEvent event) {
+        try {
+            if (event.getCode() == KeyCode.ENTER) {
+                validaLogin();
+            }
+        } catch (LoginErroException e) {
+            Alerts.mostrarNotificacao(e.getMessage(), Alert.AlertType.ERROR);
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    void fazerCadastro() {
         try {
             String usuarioLogin = usuario.getText();
             String senhaLogin = senha.getText();
-            if (usuarioDAO.existeUser(usuarioLogin)){
+            if (usuarioDAO.existeUser(usuarioLogin)) {
                 throw new CadastroErroException();
             } else {
                 usuarioDAO.createNewUser(usuarioLogin, senhaLogin);
@@ -65,10 +85,11 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+
     private synchronized void setJanela(String nomeJanela) {
 
         try {
-            Main.alteraScena(nomeJanela,  653, 768);
+            Main.alteraScena(nomeJanela, 653, 768);
 
         } catch (IOException e) {
             Alerts.mostrarNotificacao(e.getMessage(), Alert.AlertType.ERROR);

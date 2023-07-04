@@ -3,7 +3,7 @@ package entidades;
 import javax.persistence.*;
 
 @MappedSuperclass
-public class Produto {
+public abstract class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
